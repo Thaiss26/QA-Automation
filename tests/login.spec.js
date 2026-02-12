@@ -1,19 +1,35 @@
 // @ts-check
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
+import { LoginPage } from "../pages/LoginPage";
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test.describe("Fluxo completo de login", () => {
+  test.beforeEach(async ({ page }) => {
+    const login = new LoginPage(page);
+    await login.acessar();
+  });
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  test("Login com sucesso", async ({ page }) => {
+    const login = new LoginPage(page);
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+    await login.realizarLogin('thais.teste26@gmail.com', 'Thais@26');
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+    await login.clicarOK();
+  });
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  test("Login com campo usuário vazio", async ({ page }) => {
+    const login = new LoginPage(page);
+    
+    await login.acessar()
+    await login.realizarLogin('', 'Thais@26');
+    await login.fecharModalErro();
+  });
+
+  test("Login com apenas Usuário preenchido", async ({page}) => {
+    const login = new LoginPage(page);
+
+    await login.acessar()
+    await login.realizarLogin('thais.teste26@gmail.com', '')
+    await login.fecharModalErro();
+  })
+  
 });
