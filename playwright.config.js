@@ -30,7 +30,7 @@ export default defineConfig({
     //baseURL: "https://carlosfelixpenha-create.github.io/QAPlayground/frontend",
     browserName: "chromium",
     channel: "chrome",
-    headless: false,
+    headless: true,
     screenshot: "only-on-failure",
     video: "retain-on-failure",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */

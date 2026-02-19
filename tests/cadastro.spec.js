@@ -1,18 +1,12 @@
 // @ts-check
 import { test } from '@playwright/test';
 import { CadastroPage } from '../pages/CadastroPage';
+import { usuarioBase } from '../data/usuarioBase';
 
 test.describe('Fluxo de Cadastro de Usuário', () => {
 
   /** @type {CadastroPage} */
   let cadastro;
-
-  const usuarioBase = {
-    nome: 'Thais Silva',
-    email: 'thais.teste26@gmail.com',
-    senha: 'Thais@26',
-    confirmarSenha: 'Thais@26'
-  };
 
   test.beforeEach(async ({ page }) => {
     cadastro = new CadastroPage(page);
