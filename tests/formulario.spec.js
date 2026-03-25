@@ -125,8 +125,8 @@ test.describe('Fluxo completo de formulário', () => {
     await formulario.selecionarSexo('Feminino');
     await formulario.selecionarInteresses(['Frontend', 'Backend']);
     await formulario.preencherDataNascimento('2000-01-01');
-    await formulario.preencherTelefone('(99) 99999-9999');
-    await formulario.preencherCPF('999.999.999-99');
+    await formulario.preencherTelefone('(92) 9932241-07');
+    await formulario.preencherCPF('822.119.706-80');
 
     await formulario.enviarFormulario();
     await formulario.validarModalSucesso();

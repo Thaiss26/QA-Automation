@@ -1,4 +1,5 @@
 import { expect } from "@playwright/test";
+import { routes } from '../utils/routes';
 
 export class LoginPage {
   constructor(page) {
@@ -15,9 +16,7 @@ export class LoginPage {
   }
 
   async acessar() {
-    await this.page.goto(
-      "https://carlosfelixpenha-create.github.io/QAPlayground/frontend/pages/login.html",
-    );
+    await this.page.goto(routes.login);
   }
 
   async preencherUsuario(usuario) {

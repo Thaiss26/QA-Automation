@@ -30,7 +30,7 @@ export class CadastroPage {
   }
 
   async acessar() {
-    await this.page.goto(routes.cadastro); // ✅ agora vem do routes
+    await this.page.goto(routes.cadastro); // puxa dos routes
     await this.limparEstadoDaAplicacao();
     await this.page.reload();
   }

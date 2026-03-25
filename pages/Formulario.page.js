@@ -1,4 +1,5 @@
  import { expect } from '@playwright/test';
+ import { routes } from '../utils/routes';
 
 export class FormularioPage {
   constructor(page) {
@@ -25,9 +26,7 @@ export class FormularioPage {
   }
 
   async acessar() {
-    await this.page.goto(
-      'https://carlosfelixpenha-create.github.io/QAPlayground/frontend/pages/formulario-2.html'
-    );
+    await this.page.goto(routes.formulario);
   }
 
   async enviarFormulario() {
