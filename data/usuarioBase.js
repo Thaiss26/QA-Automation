@@ -1,6 +1,6 @@
 export const usuarioBase = {
-  nome: 'Thais Silva',
-  email: 'thais.teste26@gmail.com',
-  senha: 'Thais@26',
-  confirmarSenha: 'Thais@26'
+  nome: 'Thais Silva', // pode ficar fixo
+  email: process.env.EMAIL_VALIDO,
+  senha: process.env.SENHA_VALIDA,
+  confirmarSenha: process.env.SENHA_VALIDA
 };

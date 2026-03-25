@@ -1,4 +1,5 @@
 import { expect } from '@playwright/test';
+import { routes } from '../utils/routes';
 
 export class CadastroPage {
   constructor(page) {
@@ -29,9 +30,7 @@ export class CadastroPage {
   }
 
   async acessar() {
-    await this.page.goto(
-      'https://carlosfelixpenha-create.github.io/QAPlayground/frontend/pages/cadastro.html'
-    );
+    await this.page.goto(routes.cadastro); // ✅ agora vem do routes
     await this.limparEstadoDaAplicacao();
     await this.page.reload();
   }
@@ -40,8 +39,9 @@ export class CadastroPage {
     if (nome !== undefined) await this.inputNome.fill(nome);
     if (email !== undefined) await this.inputEmail.fill(email);
     if (senha !== undefined) await this.inputSenha.fill(senha);
-    if (confirmarSenha !== undefined)
+    if (confirmarSenha !== undefined) {
       await this.inputConfirmarSenha.fill(confirmarSenha);
+    }
   }
 
   async submeter() {
