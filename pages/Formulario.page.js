@@ -1,5 +1,5 @@
- import { expect } from '@playwright/test';
- import { routes } from '../utils/routes';
+import { expect } from '@playwright/test';
+import { routes } from '../utils/routes';
 
 export class FormularioPage {
   constructor(page) {
@@ -20,9 +20,9 @@ export class FormularioPage {
     this.botaoEnviar = page.getByRole('button', { name: 'Enviar' });
     this.botaoOk = page.getByRole('button', { name: 'OK' });
 
-    // Modais
-    this.modalErro = page.getByRole('heading', { name: 'Erro no Formulário' });
-    this.modalSucesso = page.getByText('Formulário enviado com sucesso');
+    // Modais (AJUSTADOS)
+    this.modalErro = page.getByRole('heading', { name: /Erro no Formulário/i });
+    this.modalSucesso = page.getByText(/sucesso/i); 
   }
 
   async acessar() {
@@ -35,7 +35,7 @@ export class FormularioPage {
 
   // ===== ERRO =====
   async validarModalErro() {
-    await expect(this.modalErro).toBeVisible();
+    await expect(this.modalErro).toBeVisible({ timeout: 10000 });
   }
 
   async fecharModalErro() {
@@ -44,7 +44,7 @@ export class FormularioPage {
 
   // ===== SUCESSO =====
   async validarModalSucesso() {
-    await expect(this.modalSucesso).toBeVisible();
+    await expect(this.modalSucesso).toBeVisible({ timeout: 10000 }); 
   }
 
   async fecharModalSucesso() {

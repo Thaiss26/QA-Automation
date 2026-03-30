@@ -121,17 +121,18 @@ test.describe('Fluxo completo de formulário', () => {
     await formulario.preencherCPF('999.999.999-99');
   });
 
-    test('Verificar envio do formulário com todos os campos obrigatórios válidos', async () => {
-    await formulario.selecionarSexo('Feminino');
-    await formulario.selecionarInteresses(['Frontend', 'Backend']);
-    await formulario.preencherDataNascimento('2000-01-01');
-    await formulario.preencherTelefone('(92) 9932241-07');
-    await formulario.preencherCPF('822.119.706-80');
+  test('Verificar envio do formulário com todos os campos obrigatórios válidos', async () => {
+  await formulario.selecionarSexo('Feminino');
+  await formulario.selecionarInteresses(['Frontend', 'Backend']);
+  await formulario.preencherDataNascimento('2000-01-01');
+  await formulario.preencherTelefone('92993224107');
+  await formulario.preencherCPF('37364448268');
 
-    await formulario.enviarFormulario();
-    await formulario.validarModalSucesso();
-    await formulario.fecharModalSucesso();
-  });
+  await formulario.enviarFormulario(); 
+
+  await formulario.validarModalSucesso();
+  await formulario.fecharModalSucesso();
+});
 
   test('Verificar limpeza automática dos campos após envio realizado com sucesso', async () => {
     await formulario.validarCamposLimpos();
