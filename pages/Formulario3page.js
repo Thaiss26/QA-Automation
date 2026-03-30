@@ -32,4 +32,38 @@ export class Formulario3Page {
     async acessar() {
         await this.page.goto(routes.formulario3);
     }
+
+    async enviarArquivo(upload, arquivo) {
+    await upload.setInputFiles(`tests/fixtures/${arquivo}`);
+  }
+
+  async confirmarModal() {
+    await this.botaoOk.click();
+  }
+
+  async selecionarLocalizacao({ pais, estado, cidade }) {
+    if (pais) await this.selectPais.selectOption(pais);
+    if (estado) await this.selectEstado.selectOption(estado);
+    if (cidade) await this.selectCidade.selectOption(cidade);
+  }
+
+  async enviarFormulario() {
+    await this.botaoEnviar.click();
+  }
+
+  async verificarErro() {
+    await expect(this.modalErro).toBeVisible();
+  }
+
+  async verificarSucesso() {
+    await expect(this.mensagemSucesso).toBeVisible();
+  }
+
+  async verificarArquivoSelecionado() {
+    await expect(this.mensagemArquivo).toBeVisible();
+  }
+
+  async verificarCamposInvalidos() {
+    await expect(this.mensagemCamposInvalidos).toBeVisible();
+  }
 }
