@@ -1,16 +1,18 @@
+const basePath = 'tests/fixtures/';
+
 export const arquivos = {
-  pdfValido: 'tests/fixtures/arquivo.pdf',
-  pdfInvalido: 'tests/fixtures/arquivo.xlsx',
+  pdfValido: `${basePath}arquivo.pdf`,
+  pdfInvalido: `${basePath}arquivo.xlsx`,
 
-  docxValido: 'tests/fixtures/arquivo.docx',
-  docxInvalido: 'tests/fixtures/arquivo.xlsx',
+  docxValido: `${basePath}arquivo.docx`,
+  docxInvalido: `${basePath}arquivo.xlsx`,
 
-  jpgValido: 'tests/fixtures/imagem.jpg',
-  jpgInvalido: 'tests/fixtures/arquivo.csv',
+  jpgValido: `${basePath}imagem.jpg`,
+  jpgInvalido: `${basePath}arquivo.csv`,
 
-  xlsxValido: 'tests/fixtures/arquivo.xlsx',
-  xlsxInvalido: 'tests/fixtures/arquivo.csv',
+  xlsxValido: `${basePath}arquivo.xlsx`,
+  xlsxInvalido: `${basePath}arquivo.csv`,
 
-  txtValido: 'tests/fixtures/arquivo.txt',
-  txtInvalido: 'tests/fixtures/arquivo.csv'
+  txtValido: `${basePath}arquivo.txt`,
+  txtInvalido: `${basePath}arquivo.csv`
 };

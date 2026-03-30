@@ -21,13 +21,13 @@ test.describe('Fluxo de Cadastro de Endereço', () => {
     cep: '69096000'
   };
 
-  test('Verificar cadastro de endereço com campos vazios', async () => {
+  test('CT01 - Verificar cadastro de endereço com campos vazios', async () => {
     await endereco.salvar();
     await endereco.validarErro();
     await endereco.fecharModal();
   });
 
-  test('Verificar cadastro com logradouro vazio', async () => {
+  test('CT02 - Verificar cadastro com logradouro vazio', async () => {
     await endereco.preencherEndereco({
       ...dadosValidos,
       logradouro: ''
@@ -38,7 +38,7 @@ test.describe('Fluxo de Cadastro de Endereço', () => {
     await endereco.fecharModal();
   });
 
-  test('Verificar cadastro com logradouro só números', async () => {
+  test('CT03 - Verificar cadastro com logradouro só números', async () => {
     await endereco.preencherEndereco({
       ...dadosValidos,
       logradouro: '12345'
@@ -49,7 +49,7 @@ test.describe('Fluxo de Cadastro de Endereço', () => {
     await endereco.fecharModal();
   });
 
-  test('Número com letras', async () => {
+  test('CT04 - Verificar se é possivel cadatrar número com letras', async () => {
     await endereco.preencherEndereco({
       ...dadosValidos,
       numero: '12A'
@@ -60,7 +60,7 @@ test.describe('Fluxo de Cadastro de Endereço', () => {
     await endereco.fecharModal();
   });
 
-  test('Número vazio', async () => {
+  test('CT05 - Verificar se é possivel cadastrar com Número vazio', async () => {
     await endereco.preencherEndereco({
       ...dadosValidos,
       numero: ''
@@ -71,7 +71,7 @@ test.describe('Fluxo de Cadastro de Endereço', () => {
     await endereco.fecharModal();
   });
 
-  test('Complemento opcional', async () => {
+  test('CT06 - Verificar se é possivel cadastrar complemento opcional', async () => {
     await endereco.preencherEndereco({
       ...dadosValidos,
       complemento: ''
@@ -82,7 +82,7 @@ test.describe('Fluxo de Cadastro de Endereço', () => {
     await endereco.fecharModal();
   });
 
-  test('Bairro inválido curto', async () => {
+  test('CT07- Bairro inválido curto', async () => {
     await endereco.preencherEndereco({
       ...dadosValidos,
       bairro: 'Ce'
@@ -93,7 +93,7 @@ test.describe('Fluxo de Cadastro de Endereço', () => {
     await endereco.fecharModal();
   });
 
-  test('Bairro com números', async () => {
+  test('CT08- Verificar se é possivel cadastrar Bairro com números', async () => {
     await endereco.preencherEndereco({
       ...dadosValidos,
       bairro: '123'
@@ -104,7 +104,7 @@ test.describe('Fluxo de Cadastro de Endereço', () => {
     await endereco.fecharModal();
   });
 
-  test('Cidade inválida', async () => {
+  test('CT09- Verificar se é possivel cadastrar com Cidade inválida', async () => {
     await endereco.preencherEndereco({
       ...dadosValidos,
       cidade: '12'
@@ -115,7 +115,7 @@ test.describe('Fluxo de Cadastro de Endereço', () => {
     await endereco.fecharModal();
   });
 
-  test('Estado inválido', async () => {
+  test('CT10 - Verificar cadastro com Estado inválido', async () => {
     await endereco.preencherEndereco({
       ...dadosValidos,
       estado: 'XX'
@@ -126,7 +126,7 @@ test.describe('Fluxo de Cadastro de Endereço', () => {
     await endereco.fecharModal();
   });
 
-  test('CEP com letras', async () => {
+  test('CT11- Verificar se é possivel cadastrar CEP com letras', async () => {
     await endereco.preencherEndereco({
       ...dadosValidos,
       cep: '69A00000'
@@ -137,7 +137,7 @@ test.describe('Fluxo de Cadastro de Endereço', () => {
     await endereco.fecharModal();
   });
 
-  test('CEP inválido curto', async () => {
+  test('CT12- Verificar se é possivel cadastrar CEP inválido curto', async () => {
     await endereco.preencherEndereco({
       ...dadosValidos,
       cep: '123'
@@ -148,7 +148,7 @@ test.describe('Fluxo de Cadastro de Endereço', () => {
     await endereco.fecharModal();
   });
 
-  test('Cadastro válido', async () => {
+  test('CT13 - Cadastro válido', async () => {
     await endereco.preencherEndereco(dadosValidos);
     await endereco.salvar();
     await endereco.validarSucesso();

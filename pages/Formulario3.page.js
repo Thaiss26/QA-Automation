@@ -33,9 +33,10 @@ export class Formulario3Page {
         await this.page.goto(routes.formulario3);
     }
 
-    async enviarArquivo(upload, arquivo) {
-    await upload.setInputFiles(`tests/fixtures/${arquivo}`);
-  }
+    async enviarArquivo(upload, caminhoArquivo) {
+      await upload.setInputFiles(caminhoArquivo);
+}
+
 
   async confirmarModal() {
     await this.botaoOk.click();
