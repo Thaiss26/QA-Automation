@@ -2,8 +2,8 @@ import { expect } from '@playwright/test';
 import { routes } from '../utils/routes';
 
 export class Formulario3Page {
-    constructor(page) {
-        this.page = page;
+  constructor(page) {
+    this.page = page;
 
     // Uploads
     this.uploadPdf = page.getByRole('button', { name: 'Upload de Arquivo (PDF)*:' });
@@ -26,26 +26,25 @@ export class Formulario3Page {
     this.mensagemSucesso = page.getByText('Formulário enviado com sucesso');
     this.mensagemArquivo = page.getByText('Arquivo selecionado');
     this.mensagemCamposInvalidos = page.getByText('Existem campos inválidos.');
+  }
 
-    }
+  async acessar() {
+    await this.page.goto(routes.formulario03);
+  }
 
-    async acessar() {
-        await this.page.goto(routes.formulario3);
-    }
-
-    async enviarArquivo(upload, caminhoArquivo) {
-      await upload.setInputFiles(caminhoArquivo);
-}
-
+  async enviarArquivo(upload, caminhoArquivo) {
+    await upload.setInputFiles(caminhoArquivo);
+  }
 
   async confirmarModal() {
     await this.botaoOk.click();
   }
 
-  async selecionarLocalizacao({ pais, estado, cidade }) {
-    if (pais) await this.selectPais.selectOption(pais);
-    if (estado) await this.selectEstado.selectOption(estado);
-    if (cidade) await this.selectCidade.selectOption(cidade);
+
+  async selecionarLocalizacao({ pais, estado, cidade }) { 
+    if (pais) await this.selectPais.selectOption(pais); 
+    if (estado) await this.selectEstado.selectOption(estado); 
+    if (cidade) await this.selectCidade.selectOption(cidade); 
   }
 
   async enviarFormulario() {

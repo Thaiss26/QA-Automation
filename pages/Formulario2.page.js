@@ -2,75 +2,94 @@ import { expect } from '@playwright/test';
 import { routes } from '../utils/routes';
 
 export class Formulario2Page {
-    constructor(page) {
-        this.page = page;
+  constructor(page) {
+    this.page = page;
 
-    // Campos 
-    this.inputLogradouro = page.getByRole('textbox', { name: 'Logradouro*:' });
-    this.inputNumero = page.getByRole('textbox', { name: 'Número*:' });
-    this.inputComplemento = page.getByRole('textbox', { name: 'Complemento:' });
-    this.inputBairro = page.getByRole('textbox', { name: 'Bairro*:' });
-    this.inputCidade = page.getByRole('textbox', { name: 'Cidade*:' });
-    this.inputEstado = page.getByRole('textbox', { name: 'Estado*:' });
-    this.inputCep = page.getByRole('textbox', { name: 'CEP*:' });
+    // Campos
+    this.radioMasculino = page.getByRole('radio', { name: 'Masculino' });
+    this.radioFeminino = page.getByRole('radio', { name: 'Feminino' });
 
-    this.botaoSalvar = page.getByRole('button', { name: 'Salvar' });
+    this.checkboxFrontend = page.getByRole('checkbox', { name: 'Frontend' });
+    this.checkboxBackend = page.getByRole('checkbox', { name: 'Backend' });
+    this.checkboxQA = page.getByRole('checkbox', { name: 'QA' });
+
+    this.inputDataNascimento = page.getByRole('textbox', { name: 'Data de Nascimento*:' });
+    this.inputTelefone = page.getByRole('textbox', { name: 'Telefone*:' });
+    this.inputCPF = page.getByRole('textbox', { name: 'CPF*:' });
+
+    this.botaoEnviar = page.getByRole('button', { name: 'Enviar' });
     this.botaoOk = page.getByRole('button', { name: 'OK' });
 
-    // Modais 
-    this.mensagemSucesso = page.getByText('Endereço cadastrado com');
-    this.tituloErro = page.getByRole('heading', {
-      name: 'Erro no Cadastro de Endereço'
-    });
-
-    }
-
-    async acessar() {
-        await this.page.goto(routes.formulario1);
-    }
-
-    async preencherEndereco({
-    logradouro,
-    numero,
-    complemento,
-    bairro,
-    cidade,
-    estado,
-    cep
-  }) {
-    if (logradouro !== undefined) await this.inputLogradouro.fill(logradouro);
-    if (numero !== undefined) await this.inputNumero.fill(numero);
-    if (complemento !== undefined) await this.inputComplemento.fill(complemento);
-    if (bairro !== undefined) await this.inputBairro.fill(bairro);
-    if (cidade !== undefined) await this.inputCidade.fill(cidade);
-    if (estado !== undefined) await this.inputEstado.fill(estado);
-    if (cep !== undefined) await this.inputCep.fill(cep);
+    // Modais (AJUSTADOS)
+    this.modalErro = page.getByRole('heading', { name: /Erro no Formulário/i });
+    this.modalSucesso = page.getByText(/sucesso/i); 
   }
 
-  async salvar() {
-    await this.botaoSalvar.click();
+  async acessar() {
+    await this.page.goto(routes.formulario02);
   }
 
-  async validarSucesso() {
-    await expect(this.mensagemSucesso).toBeVisible();
+  async enviarFormulario() {
+    await this.botaoEnviar.click();
   }
 
-  async validarErro() {
-    await expect(this.tituloErro).toBeVisible();
+  // ===== ERRO =====
+  async validarModalErro() {
+    await expect(this.modalErro).toBeVisible({ timeout: 10000 });
   }
 
-  async fecharModal() {
+  async fecharModalErro() {
     await this.botaoOk.click();
   }
 
+  // ===== SUCESSO =====
+  async validarModalSucesso() {
+    await expect(this.modalSucesso).toBeVisible({ timeout: 10000 }); 
+  }
+
+  async fecharModalSucesso() {
+    await this.botaoOk.click();
+  }
+
+  // ===== AÇÕES =====
+  async selecionarSexo(sexo) {
+    if (sexo === 'Masculino') await this.radioMasculino.check();
+    if (sexo === 'Feminino') await this.radioFeminino.check();
+  }
+
+  async selecionarInteresses(interesses = []) {
+    if (interesses.includes('Frontend')) await this.checkboxFrontend.check();
+    if (interesses.includes('Backend')) await this.checkboxBackend.check();
+    if (interesses.includes('QA')) await this.checkboxQA.check();
+  }
+
+  async preencherDataNascimento(data) {
+    await this.inputDataNascimento.fill(data);
+  }
+
+  async preencherTelefone(telefone) {
+    await this.inputTelefone.fill(telefone);
+  }
+
+  async preencherCPF(cpf) {
+    await this.inputCPF.fill(cpf);
+  }
+
   // ===== VALIDAÇÕES =====
+  async validarCamposLimpos() {
+    await expect(this.radioMasculino).not.toBeChecked();
+    await expect(this.radioFeminino).not.toBeChecked();
+
+    await expect(this.checkboxFrontend).not.toBeChecked();
+    await expect(this.checkboxBackend).not.toBeChecked();
+    await expect(this.checkboxQA).not.toBeChecked();
+
+    await expect(this.inputDataNascimento).toHaveValue('');
+    await expect(this.inputTelefone).toHaveValue('');
+    await expect(this.inputCPF).toHaveValue('');
+  }
+
   async limparCampos() {
-    await this.inputLogradouro.fill('');
-    await this.inputNumero.fill('');
-    await this.inputComplemento.fill('');
-    await this.inputBairro.fill('');
-    await this.inputCidade.fill('');
-    await this.inputEstado.fill('');
-    await this.inputCep.fill('');
+    await this.page.reload();
   }
 }
